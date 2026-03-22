@@ -72,7 +72,7 @@ int main (){
     
     printf("\nFim de Jogo!\n");
     printf("Você acertou em %d tentativas.\n", tentativas);
-    printf("Total de pontos: %.1f\n", pontos); //.1f para exibir apenas uma casa decimal, ou seja, para arredondar o valor dos pontos para uma casa decimal.
+    printf("Total de pontos: %.2f\n", pontos); //.1f para exibir apenas uma casa decimal, ou seja, para arredondar o valor dos pontos para uma casa decimal.
                                               // Se fosse apenas %f, o valor dos pontos seria exibido com todas as casas decimais, o que poderia resultar em um número muito longo e difícil de ler.
 
     return 0;
