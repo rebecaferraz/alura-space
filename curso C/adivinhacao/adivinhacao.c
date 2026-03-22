@@ -26,8 +26,30 @@ int main (){
     int tentativas = 0;
     double pontos = 1000;  // double para permitir que os pontos possam ter casas decimais, ou seja, para que o jogador possa perder pontos de forma mais precisa, dependendo da diferença entre o chute e o número secreto. 
                           //Se fosse apenas um inteiro, a perda de pontos seria arredondada para o número inteiro mais próximo, o que poderia resultar em uma perda de pontos menos precisa.
+    int acertou = 0;
 
-    while (1){
+    int nivel;
+    printf("Qual o nível de dificuldade desejado?  ");
+    printf("\n(1) Fácil (2) Médio (3) Difícil\n\n");
+    printf("Escolha: ");
+    scanf("%d", &nivel);
+
+    int numerodetentativas;    
+
+    switch (nivel){
+        case 1:
+            numerodetentativas = 20;
+            break;
+        case 2:         
+            numerodetentativas = 10;
+            break;
+
+        default: 
+            numerodetentativas = 5;
+            break;
+    }
+              
+    for (int i = 1;i <= numerodetentativas; i++){ 
 
         printf("\nTentativa %d\n", tentativas+1);
         printf("\nQual é o seu chute? ");
@@ -38,21 +60,15 @@ int main (){
        
         if (chute < 0){
             printf("Você não pode chutar números negativos!! \n");
-           // i--;
-            //decrementa o contador para não contar a tentativa inválida   
             continue; //pula para a próxima iteração do loop, ou seja, para a próxima tentativa, sem executar o restante do código dentro do loop para essa tentativa.  
         } 
 
-        int acertou = chute == numerosecreto; // Em C, 0 é falso e 1 é verdadeiro. Por isso o Inteiro, C transforma em inteiro
+        acertou = (chute == numerosecreto);
         int maior = chute > numerosecreto;
         //int menor = chute < numerosecreto;
 
         if (acertou){
-            printf("\nVocê acertou. Parabéns!\n");
-            printf("Jogue novamente, você é um bom jogador!\n");
-
             break; //parar o loop 
-            //ganhou = 1; //ganhou recebe 1 (verdadeiro) para indicar que o jogador ganhou, mas não é necessário, pois o loop já será interrompido com o break. 
         }
 
         else if(maior){
@@ -64,16 +80,25 @@ int main (){
         }
         
         double pontosperdidos = abs(chute - numerosecreto) / (double)2; //casting é a ideia de converter um tipo de variavel/numeral para outro
+        
         if (pontosperdidos < 0){
             pontosperdidos = pontosperdidos * -1; //multiplicar por -1 para transformar o valor negativo em positivo, ou seja, para garantir que a perda de pontos seja sempre um valor positivo, independentemente da ordem dos números na subtração.
         }
         pontos = pontos - pontosperdidos; //pontos recebe o valor atual de pontos menos a perda de pontos calculada, ou seja, o jogador perde pontos com base na diferença entre o chute e o número secreto. Quanto maior a diferença, maior a perda de pontos. 
     }
-    
     printf("\nFim de Jogo!\n");
-    printf("Você acertou em %d tentativas.\n", tentativas);
-    printf("Total de pontos: %.2f\n", pontos); //.1f para exibir apenas uma casa decimal, ou seja, para arredondar o valor dos pontos para uma casa decimal.
-                                              // Se fosse apenas %f, o valor dos pontos seria exibido com todas as casas decimais, o que poderia resultar em um número muito longo e difícil de ler.
+   
+    if (acertou){
+        printf("\nVocê ganhou!\n");
+        printf("Você acertou em %d tentativas.\n", tentativas);
+        printf("Total de pontos: %.2f\n", pontos); //.1f para exibir apenas uma casa decimal, ou seja, para arredondar o valor dos pontos para uma casa decimal.
+                                 // Se fosse apenas %f, o valor dos pontos seria exibido com todas as casas decimais, o que poderia resultar em um número muito longo e difícil de ler.             
+    }else{
+        printf("Você perdeu! :(\n");
+        printf("O número secreto era %d.\n", numerosecreto);
+        printf("Tente novamente!");
+
+    }                                     
 
     return 0;
 }
