@@ -7,19 +7,19 @@ int main (){
     sprintf(palavrasecreta, "MELANCIA");
 
     int acertou = 0;
-    int enforcou = 0;
+    int enforcou = 1;
 
     do{
         char chute;
         scanf("%c", &chute);
 
-        for (int i = 0; i < strlen(palavrasecreta);i++){
-            printf("Estou vendo a letra %d na posicação %d\n", palavrasecreta[i], i);
-            if (palavrasecreta [i] == chute){
-                printf("A posição %d  tem essa letra!\n", i);
+        for (int i = 0; i < strlen(palavrasecreta); i++){
+            
+            if(palavrasecreta[i] == chute){
+                printf("\nA posição %d tem essa letra!", i);
             }
-
         }
+        
     }while(!acertou && !enforcou ); // ! nega uma variavel booleana (0 ou 1), ou seja, !acertou é verdadeiro quando acertou é falso (0), e !enforcou é verdadeiro quando enforcou é falso (0). O loop continua enquanto ambos acertou e enforcou forem falsos, ou seja, enquanto o jogador não tiver acertado a palavra secreta e não tiver sido enforcado. O loop termina quando o jogador acerta a palavra secreta (acertou se torna verdadeiro) ou quando o jogador é enforcado (enforcou se torna verdadeiro).
 
     
